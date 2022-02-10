@@ -12,14 +12,24 @@
 </head>
 
 <body>
-    <div class="container fs-4">
+    <div class="container fs-6">
+        <div class="row m-5">
+            このサイトの説明　（質問に対して回答を選択して）
+        </div>
+
         <form action="/result">
             <div class="card m-5">
                 <div class="card-header">
-                    住んでいる都道府県の直近1週間の10万人あたりの新規感染者数
+                    お住まいの都道府県を選択してください
                 </div>
                 <div class="card-body">
-                    <input type="number" class="form-control form-control-lg" min="0" max="100000" name="infectionCount"
+                    <select id="ariaSelect" class="form-select">
+                        <option value="" selected>選択してください</option>
+                        {{range .AriaNames}}
+                        <option value={{.}}>{{.}}</option>
+                        {{end}}
+                    </select>
+                    <input type="number" class="form-control my-3" min="0" max="100000" name="infectionCount"
                         id="inputInfectionCount" readonly>
                 </div>
             </div>
@@ -54,7 +64,7 @@
                         </label>
                     </div>
                     <div class="form-check mb-2">
-                        <input class="form-check-input" type="radio" name="contactCountPerDay" value="11">
+                        <input class="form-check-input" type="radio" name="contactCountPerDay" value="20">
                         <label class="form-check-label">
                             11 ~ 人
                         </label>
@@ -64,7 +74,7 @@
 
             <div class="card m-5">
                 <div class="card-header">
-                    hoge
+                    普段使用されているマスクの種類
                 </div>
                 <div class="card-body">
                     <div class="form-check mb-2">
@@ -102,7 +112,7 @@
 
             <div class="card m-5">
                 <div class="card-header">
-                    hoge
+                    心がけているソーシャルディスタンス
                 </div>
                 <div class="card-body">
                     <div class="form-check mb-2">
@@ -128,19 +138,19 @@
 
             <div class="card m-5">
                 <div class="card-header">
-                    外気換気
+                    換気頻度の目安
                 </div>
                 <div class="card-body">
                     <div class="form-check mb-2">
                         <input class="form-check-input" type="radio" name="ventilation" value="0.64">
                         <label class="form-check-label">
-                            2回 / 時，または30m<sup>3</sup> / 時
+                            2回/時，または30m<sup>3</sup>/時
                         </label>
                     </div>
                     <div class="form-check mb-2">
                         <input class="form-check-input" type="radio" name="ventilation" value="0.78">
                         <label class="form-check-label">
-                            0.5回 / 時，または20m<sup>3</sup> / 時
+                            0.5回/時，または20m<sup>3</sup>/時
                         </label>
                     </div>
                     <div class="form-check mb-2">
@@ -154,7 +164,7 @@
 
             <div class="card m-5">
                 <div class="card-header">
-                    hoge
+                    普段の手洗い
                 </div>
                 <div class="card-body">
                     <div class="form-check mb-2">
@@ -192,13 +202,13 @@
 
             <div class="card m-5">
                 <div class="card-header">
-                    hoge
+                    消毒頻度の目安
                 </div>
                 <div class="card-body">
                     <div class="form-check mb-2">
                         <input class="form-check-input" type="radio" name="disinfection" value="0.01">
                         <label class="form-check-label">
-                            イベントごと，時間を決めてなど，こまめに拭き掃除やアルコールなどを用いて消毒
+                            こまめに拭き掃除やアルコールなどを用いて消毒
                         </label>
                     </div>
                     <div class="form-check mb-2">
@@ -218,19 +228,19 @@
 
             <div class="card m-5">
                 <div class="card-header">
-                    hoge
+                    普段接触するものについて
                 </div>
                 <div class="card-body">
                     <div class="form-check mb-2">
                         <input class="form-check-input" type="radio" name="contactRate" value="0.01">
                         <label class="form-check-label">
-                            作業机，会議や食堂の座席など自分が接触するものがほぼ固定されている
+                            接触するものがほぼ固定されている
                         </label>
                     </div>
                     <div class="form-check mb-2">
                         <input class="form-check-input" type="radio" name="contactRate" value="0.1">
                         <label class="form-check-label">
-                            座席など自分が接触するものが固定されていない
+                            接触するものが固定されていない
                         </label>
                     </div>
                     <div class="form-check mb-2">

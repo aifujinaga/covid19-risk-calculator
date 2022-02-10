@@ -1,5 +1,10 @@
 async function callApi() {
-    url = "https://services.arcgis.com/wlVTGRSYTzAbjjiC/arcgis/rest/services/all_patient_v2_prefecture_point_view/FeatureServer/0/query?where=PrefCode=28&outFields=人口10万人あたり感染者数&outSR=4326&f=json"
+    aria = ariaSelect.value;
+    if (!aria) {
+        aria = "大阪府"
+    }
+
+    url = "https://services.arcgis.com/wlVTGRSYTzAbjjiC/arcgis/rest/services/all_patient_v2_prefecture_point_view/FeatureServer/0/query?where=Name='" + aria + "'&outFields=人口10万人あたり感染者数&outSR=4326&f=json"
     const res = await fetch(url);
     const resjson = await res.json();
 
@@ -12,9 +17,15 @@ async function callApi() {
     };
     infectioncount /= count;
 
-    return Math.round(infectioncount, 0);
+    document.getElementById('inputInfectionCount').value = Math.round(infectioncount, 0);
+
 };
 
-let infectioncount = callApi().then(response => {
-    document.getElementById('inputInfectionCount').value = response;
-});
+window.onload = function () {
+    let ariaSelectElement = document.getElementById('ariaSelect');
+    let infectionCountElement = document.getElementById('inputInfectionCount');
+
+    ariaSelectElement.addEventListener("change", callApi);
+
+    callApi();
+};

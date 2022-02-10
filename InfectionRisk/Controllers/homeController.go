@@ -1,6 +1,8 @@
 package controllers
 
 import (
+	"net/http"
+
 	"github.com/gin-gonic/gin"
 
 	models "github/marogosteen/InfectionRisk/InfectionRisk/Models"
@@ -29,13 +31,14 @@ func (c *HomeController) RunServer() error {
 }
 
 func homeHandler(c *gin.Context) {
-	c.HTML(200, "index.html", gin.H{})
+	m := models.NewRiskFromViewModel()
+	c.HTML(200, "index.html", m)
 }
 
 func resultHandler(c *gin.Context) {
 	m, err := models.ConvertRiskCalcModel(c)
-	if err != nil {
-
+	if err == nil {
+		c.String(http.StatusBadRequest, "Risk計算を失敗しました")
 	}
 	risk := m.CalcRisk()
 
