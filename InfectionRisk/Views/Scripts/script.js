@@ -17,7 +17,7 @@ async function callApi() {
     };
     infectioncount /= count;
 
-    document.getElementById('inputInfectionCount').value = Math.round(infectioncount, 0);
+    document.getElementById('inputInfectionCount').value = Math.round(infectioncount, 0)+" 人";
 };
 
 window.onload = function () {
