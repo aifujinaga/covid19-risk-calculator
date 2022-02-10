@@ -12,33 +12,40 @@
 </head>
 
 <body>
-    <div class="container fs-6">
+    <div class="container">
         <div class="row m-5">
             このサイトの説明　（質問に対して回答を選択して）
         </div>
 
-        <form action="/result">
+        <form action="/result" class="fs-6">
             <div class="card m-5">
-                <div class="card-header">
+                <div class="card-header fs-5">
                     お住まいの都道府県を選択してください
                 </div>
                 <div class="card-body">
-                    <select id="ariaSelect" class="form-select">
+                    <select id="ariaSelect" class="form-select mb-4">
                         <option value="" selected>選択してください</option>
                         {{range .AriaNames}}
                         <option value={{.}}>{{.}}</option>
                         {{end}}
                     </select>
-                    <input type="number" class="form-control my-3" min="0" max="100000" name="infectionCount"
+                    <p class="card-text"><small>住んでいる都道府県の直近1週間の10万人あたりの新規感染者数</small></p>
+                    <input type="number" class="form-control mb-3" min="0" max="100000" name="infectionCount"
                         id="inputInfectionCount" readonly>
                 </div>
             </div>
 
             <div class="card m-5">
-                <div class="card-header">
+                <div class="card-header fs-5">
                     1日に接する人数
                 </div>
                 <div class="card-body">
+                    <div class="form-check mb-2">
+                        <input class="form-check-input" type="radio" name="contactCountPerDay" value="0">
+                        <label class="form-check-label">
+                            0 人
+                        </label>
+                    </div>
                     <div class="form-check mb-2">
                         <input class="form-check-input" type="radio" name="contactCountPerDay" value="1">
                         <label class="form-check-label">
@@ -73,7 +80,7 @@
             </div>
 
             <div class="card m-5">
-                <div class="card-header">
+                <div class="card-header fs-5">
                     普段使用されているマスクの種類
                 </div>
                 <div class="card-body">
@@ -111,7 +118,7 @@
             </div>
 
             <div class="card m-5">
-                <div class="card-header">
+                <div class="card-header fs-5">
                     心がけているソーシャルディスタンス
                 </div>
                 <div class="card-body">
@@ -137,7 +144,7 @@
             </div>
 
             <div class="card m-5">
-                <div class="card-header">
+                <div class="card-header fs-5">
                     換気頻度の目安
                 </div>
                 <div class="card-body">
@@ -163,7 +170,7 @@
             </div>
 
             <div class="card m-5">
-                <div class="card-header">
+                <div class="card-header fs-5">
                     普段の手洗い
                 </div>
                 <div class="card-body">
@@ -201,7 +208,7 @@
             </div>
 
             <div class="card m-5">
-                <div class="card-header">
+                <div class="card-header fs-5">
                     消毒頻度の目安
                 </div>
                 <div class="card-body">
@@ -227,7 +234,7 @@
             </div>
 
             <div class="card m-5">
-                <div class="card-header">
+                <div class="card-header fs-5">
                     普段接触するものについて
                 </div>
                 <div class="card-body">

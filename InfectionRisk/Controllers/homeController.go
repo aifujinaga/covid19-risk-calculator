@@ -37,8 +37,9 @@ func homeHandler(c *gin.Context) {
 
 func resultHandler(c *gin.Context) {
 	m, err := models.ConvertRiskCalcModel(c)
-	if err == nil {
+	if err != nil {
 		c.String(http.StatusBadRequest, "Risk計算を失敗しました")
+		return
 	}
 	risk := m.CalcRisk()
 

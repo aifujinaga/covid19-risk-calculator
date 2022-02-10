@@ -18,14 +18,9 @@ async function callApi() {
     infectioncount /= count;
 
     document.getElementById('inputInfectionCount').value = Math.round(infectioncount, 0);
-
 };
 
 window.onload = function () {
-    let ariaSelectElement = document.getElementById('ariaSelect');
-    let infectionCountElement = document.getElementById('inputInfectionCount');
-
+    const ariaSelectElement = document.getElementById('ariaSelect');
     ariaSelectElement.addEventListener("change", callApi);
-
-    callApi();
 };
