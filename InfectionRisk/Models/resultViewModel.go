@@ -6,7 +6,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func ConvertRiskCalcModel(c *gin.Context) (*RiskCalcModel, error) {
+func ConvertResultViewModel(c *gin.Context) (*ResultViewModel, error) {
 	infectionCount, err := strconv.ParseFloat(c.Query("infectionCount"), 64)
 	if err != nil {
 		return nil, err
@@ -40,34 +40,24 @@ func ConvertRiskCalcModel(c *gin.Context) (*RiskCalcModel, error) {
 		return nil, err
 	}
 
-	m := RiskCalcModel{
-		InfectionCount:     infectionCount,
-		ContactCountPerDay: contactCountPerDay,
-		MaskType:           maskType,
-		Distance:           distance,
-		Ventilation:        ventilation,
-		HandWash:           handWash,
-		Disinfection:       disinfection,
-		ContactRate:        contactRate,
+	contactProbability := infectionCount * contactCountPerDay
+	aerosolRisk := maskType * distance * ventilation
+	contactRisk := handWash * disinfection * contactRate
+	infectionRisk := contactProbability * (aerosolRisk + contactRisk)
+
+	m := ResultViewModel{
+		ContactProbability: contactProbability,
+		AerosolRisk:        aerosolRisk,
+		ContactRisk:        contactRisk,
+		InfectionRisk:      infectionRisk,
 	}
 
 	return &m, nil
 }
 
-type RiskCalcModel struct {
-	InfectionCount     float64
-	ContactCountPerDay float64
-	MaskType           float64
-	Distance           float64
-	Ventilation        float64
-	HandWash           float64
-	Disinfection       float64
-	ContactRate        float64
-}
-
-func (m *RiskCalcModel) CalcRisk() float64 {
-	isInfectedRisk := m.InfectionCount * m.ContactCountPerDay
-	aerosolRisk := m.MaskType * m.Distance * m.Ventilation
-	contactRisk := m.HandWash * m.Disinfection * m.ContactRate
-	return isInfectedRisk * (aerosolRisk + contactRisk)
+type ResultViewModel struct {
+	ContactProbability float64
+	AerosolRisk        float64
+	ContactRisk        float64
+	InfectionRisk      float64
 }

@@ -36,12 +36,11 @@ func homeHandler(c *gin.Context) {
 }
 
 func resultHandler(c *gin.Context) {
-	m, err := models.ConvertRiskCalcModel(c)
+	m, err := models.ConvertResultViewModel(c)
 	if err != nil {
 		c.String(http.StatusBadRequest, "Risk計算を失敗しました")
 		return
 	}
-	risk := m.CalcRisk()
 
-	c.HTML(200, "result.html", gin.H{"Risk": risk})
+	c.HTML(200, "result.html", m)
 }
