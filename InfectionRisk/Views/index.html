@@ -43,7 +43,7 @@
         </div>
 
         <div class="m-1">
-            <form action="/result" class="fs-6">
+            <form class="fs-6" name="infectionForm">
                 <div class="card border-secondary mb-5">
                     <div class="card-header fs-6">
                         お住まいの都道府県を選択してください
@@ -55,7 +55,7 @@
                             <option value={{.}}>{{.}}</option>
                             {{end}}
                         </select>
-                        <input class="form-control" id="inputInfectionCount" readonly>
+                        <input class="form-control" name="infectedPeople" readonly>
                         <p class="card-text"><small>住んでいる都道府県の直近1週間の10万人あたりの新規感染者数</small></p>
                     </div>
                 </div>
