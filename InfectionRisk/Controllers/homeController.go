@@ -23,7 +23,7 @@ func (c *HomeController) RunServer() error {
 	router.LoadHTMLGlob("InfectionRisk/Views/*.html")
 
 	router.GET("/", homeHandler)
-	router.GET("/result/", resultHandler)
+	router.GET("/policy", policyHandler)
 
 	err = router.Run(":" + c.Port)
 	if err != nil {
@@ -38,6 +38,6 @@ func homeHandler(c *gin.Context) {
 	c.HTML(200, "index.html", m)
 }
 
-func resultHandler(c *gin.Context) {
-	c.HTML(200, "result.html", gin.H{})
+func policyHandler(c *gin.Context) {
+	c.HTML(200, "policy.html", gin.H{})
 }
