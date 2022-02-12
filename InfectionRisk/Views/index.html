@@ -7,7 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <script src="/scripts/script.js"></script>
     <title>感染リスク計算</title>
 </head>
 
@@ -17,7 +16,7 @@
             <div class="container-fluid ms-2">
                 <div class="row mt-1">
                     <p class="col-lg fs-4">
-                        新型コロナウィルスの感染リスク計算
+                        新型コロナウィルス感染リスク計算
                     </p>
                 </div>
             </div>
@@ -27,274 +26,351 @@
     <div class="container mt-5">
         <div class="card border-secondary mb-5">
             <div class="m-3">
-                <h5>概要</h5>
+                <h4>概要</h4>
                 <p class="fs-6 mx-2">
                     新型コロナウイルスに感染する確率を試算し、ご自分の感染対策がどの程度効果があるかを確認できます。
                 </p>
-                <h5>注意</h5>
+                <h4>注意</h4>
                 <p class="fs-6 mx-2">
-                    感染リスクの計算は，2020～2021年の感染情報に基づいています。2022年の第6波以降の感染状況と違うこともあるかも知れませんがご了承下さい。
+                    感染リスクの計算は，2020～2021年の感染情報に基づいています。2022年の第6波以降の感染状況と違う場合があります。ご了承下さい。
                 </p>
-                <h5>参照</h5>
+                <h4>参照</h4>
                 <p class="fs-6 mx-2">
                     日本リスク研究学会誌2022年第32巻第1号「新型コロナウイルスの感染リスクに基づく感染対策の評価」
                 </p>
             </div>
         </div>
 
-        <div class="m-1">
-            <form class="fs-6" name="infectionForm">
-                <div class="card border-secondary mb-5">
-                    <div class="card-header fs-6">
-                        お住まいの都道府県を選択してください
-                    </div>
-                    <div class="card-body">
-                        <select id="ariaSelect" class="form-select mb-3">
-                            <option value="" selected>選択してください</option>
+        <!-- form -->
+        <form class="fs-6 needs-validation" name="infectionForm" novalidate>
+            <div class="card border-secondary form-group mb-5">
+                <div class="card-header fs-5">
+                    お住まいの都道府県
+                </div>
+
+                <div class="card-body">
+                    <div class="mb-3">
+                        <select id="ariaSelect" class="form-select" for="ariaSelectFor" required>
+                            <option selected disabled value="">選択してください</option>
                             {{range .AriaNames}}
                             <option value={{.}}>{{.}}</option>
                             {{end}}
                         </select>
-                        <input class="form-control" name="infectedPeople" readonly>
-                        <p class="card-text"><small>住んでいる都道府県の直近1週間の10万人あたりの新規感染者数</small></p>
+
+                        <div class="invalid-feedback">
+                            在住の都道府県を選択してください
+                        </div>
+                    </div>
+
+                    <input class="form-control" name="infectedPeople" id="infectedPeopleId" readonly>
+
+                    <p class="card-text"><small>住んでいる都道府県の直近1週間の10万人あたりの新規感染者数</small></p>
+                </div>
+            </div>
+
+            <div class="card border-secondary form-group mb-5">
+                <div class="card-header fs-5">
+                    1日に接する人数
+                </div>
+                <div class="card-body">
+                    <div class="alert alert-warning mb-3" role="alert">
+                        <p class="card-text"><small>人との接触時間が15分以上で距離が1m以内</small></p>
+                    </div>
+
+                    <div class="form-check mb-2">
+                        <input class="form-check-input" type="radio" name="contactCountPerDay"
+                            id="contactCountPerDayId0" value="0" required />
+                        <label class="form-check-label" for="contactCountPerDayId0">
+                            0 人
+                        </label>
+                    </div>
+                    <div class="form-check mb-2">
+                        <input class="form-check-input" type="radio" name="contactCountPerDay"
+                            id="contactCountPerDayId1" value="1" required />
+                        <label class="form-check-label" for="contactCountPerDayId1">
+                            1 人
+                        </label>
+                    </div>
+                    <div class="form-check mb-2">
+                        <input class="form-check-input" type="radio" name="contactCountPerDay"
+                            id="contactCountPerDayId2" value="2" required />
+                        <label class="form-check-label" for="contactCountPerDayId2">
+                            2 人
+                        </label>
+                    </div>
+                    <div class="form-check mb-2">
+                        <input class="form-check-input" type="radio" name="contactCountPerDay"
+                            id="contactCountPerDayId3" value="5" required />
+                        <label class="form-check-label" for="contactCountPerDayId3">
+                            3 ~ 5 人
+                        </label>
+                    </div>
+                    <div class="form-check mb-2">
+                        <input class="form-check-input" type="radio" name="contactCountPerDay"
+                            id="contactCountPerDayId4" value="10" required />
+                        <label class="form-check-label" for="contactCountPerDayId4">
+                            6 ~ 10 人
+                        </label>
+                    </div>
+                    <div class="form-check mb-2">
+                        <input class="form-check-input" type="radio" name="contactCountPerDay"
+                            id="contactCountPerDayId5" value="20" required />
+                        <label class="form-check-label" for="contactCountPerDayId5">
+                            11 ~ 人
+                        </label>
+                        <div class="invalid-feedback my-2">いずれかを選択してください</div>
                     </div>
                 </div>
+            </div>
 
-                <div class="card border-secondary mb-5">
-                    <div class="card-header fs-6">
-                        1日に接する人数
+            <div class="card border-secondary form-group mb-5">
+                <div class="card-header fs-5">
+                    普段使用されているマスクの種類
+                </div>
+                <div class="card-body">
+                    <div class="form-check mb-2">
+                        <input class="form-check-input" type="radio" value="0.1" name="maskType" required />
+                        <label class="form-check-label">
+                            N95マスクや医療マスク
+                        </label>
                     </div>
-                    <div class="card-body">
-                        <div class="alert alert-warning mb-3" role="alert">
-                            <p class="card-text"><small>接触時間が15分以上で距離が1m以内</small></p>
-                        </div>
-
-                        <div class="form-check mb-2">
-                            <input class="form-check-input" type="radio" name="contactCountPerDay" value="0">
-                            <label class="form-check-label">
-                                0 人
-                            </label>
-                        </div>
-                        <div class="form-check mb-2">
-                            <input class="form-check-input" type="radio" name="contactCountPerDay" value="1">
-                            <label class="form-check-label">
-                                1 人
-                            </label>
-                        </div>
-                        <div class="form-check mb-2">
-                            <input class="form-check-input" type="radio" name="contactCountPerDay" value="2">
-                            <label class="form-check-label">
-                                2 人
-                            </label>
-                        </div>
-                        <div class="form-check mb-2">
-                            <input class="form-check-input" type="radio" name="contactCountPerDay" value="5">
-                            <label class="form-check-label">
-                                3 ~ 5 人
-                            </label>
-                        </div>
-                        <div class="form-check mb-2">
-                            <input class="form-check-input" type="radio" name="contactCountPerDay" value="10">
-                            <label class="form-check-label">
-                                6 ~ 10 人
-                            </label>
-                        </div>
-                        <div class="form-check mb-2">
-                            <input class="form-check-input" type="radio" name="contactCountPerDay" value="20">
-                            <label class="form-check-label">
-                                11 ~ 人
-                            </label>
-                        </div>
+                    <div class="form-check mb-2">
+                        <input class="form-check-input" type="radio" value="0.3" name="maskType" required />
+                        <label class="form-check-label">
+                            不織布マスク
+                        </label>
+                    </div>
+                    <div class="form-check mb-2">
+                        <input class="form-check-input" type="radio" value="0.6" name="maskType" required />
+                        <label class="form-check-label">
+                            布マスク
+                        </label>
+                    </div>
+                    <div class="form-check mb-2">
+                        <input class="form-check-input" type="radio" value="0.65" name="maskType" required />
+                        <label class="form-check-label">
+                            ウレタンマスク
+                        </label>
+                    </div>
+                    <div class="form-check mb-2">
+                        <input class="form-check-input" type="radio" value="1" name="maskType" required />
+                        <label class="form-check-label">
+                            ファイスシールドやマウスシールド
+                        </label>
+                        <div class="invalid-feedback my-2">いずれかを選択してください</div>
                     </div>
                 </div>
+            </div>
 
-                <div class="card border-secondary mb-5">
-                    <div class="card-header fs-6">
-                        普段使用されているマスクの種類
+            <div class="card border-secondary form-group mb-5">
+                <div class="card-header fs-5">
+                    心がけているソーシャルディスタンス
+                </div>
+                <div class="card-body">
+                    <div class="form-check mb-2">
+                        <input class="form-check-input" type="radio" name="distance" value="0.25" required />
+                        <label class="form-check-label">
+                            2 m
+                        </label>
                     </div>
-                    <div class="card-body">
-                        <div class="form-check mb-2">
-                            <input class="form-check-input" type="radio" name="maskType" value="0.1">
-                            <label class="form-check-label">
-                                N95マスクや医療マスク
-                            </label>
-                        </div>
-                        <div class="form-check mb-2">
-                            <input class="form-check-input" type="radio" name="maskType" value="0.3">
-                            <label class="form-check-label">
-                                不織布マスク
-                            </label>
-                        </div>
-                        <div class="form-check mb-2">
-                            <input class="form-check-input" type="radio" name="maskType" value="0.6">
-                            <label class="form-check-label">
-                                布マスク
-                            </label>
-                        </div>
-                        <div class="form-check mb-2">
-                            <input class="form-check-input" type="radio" name="maskType" value="0.65">
-                            <label class="form-check-label">
-                                ウレタンマスク
-                            </label>
-                        </div>
-                        <div class="form-check mb-2">
-                            <input class="form-check-input" type="radio" name="maskType" value="1">
-                            <label class="form-check-label">
-                                ファイスシールドやマウスシールド
-                            </label>
-                        </div>
+                    <div class="form-check mb-2">
+                        <input class="form-check-input" type="radio" name="distance" value="0.5" required />
+                        <label class="form-check-label">
+                            1 m
+                        </label>
+                    </div>
+                    <div class="form-check mb-2">
+                        <input class="form-check-input" type="radio" name="distance" value="1" required />
+                        <label class="form-check-label">
+                            取らない
+                        </label>
+                        <div class="invalid-feedback my-2">いずれかを選択してください</div>
                     </div>
                 </div>
+            </div>
 
-                <div class="card border-secondary mb-5">
-                    <div class="card-header fs-6">
-                        心がけているソーシャルディスタンス
+            <div class="card border-secondary form-group mb-5">
+                <div class="card-header fs-5">
+                    換気頻度の目安
+                </div>
+                <div class="card-body">
+                    <div class="form-check mb-2">
+                        <input class="form-check-input" type="radio" name="ventilation" value="0.64" required />
+                        <label class="form-check-label">
+                            2回/時，または30m<sup>3</sup>/時
+                        </label>
                     </div>
-                    <div class="card-body">
-                        <div class="form-check mb-2">
-                            <input class="form-check-input" type="radio" name="distance" value="0.25">
-                            <label class="form-check-label">
-                                2 m
-                            </label>
-                        </div>
-                        <div class="form-check mb-2">
-                            <input class="form-check-input" type="radio" name="distance" value="0.5">
-                            <label class="form-check-label">
-                                1 m
-                            </label>
-                        </div>
-                        <div class="form-check mb-2">
-                            <input class="form-check-input" type="radio" name="distance" value="1">
-                            <label class="form-check-label">
-                                取らない
-                            </label>
-                        </div>
+                    <div class="form-check mb-2">
+                        <input class="form-check-input" type="radio" name="ventilation" value="0.78" required />
+                        <label class="form-check-label">
+                            0.5回/時，または20m<sup>3</sup>/時
+                        </label>
+                    </div>
+                    <div class="form-check mb-2">
+                        <input class="form-check-input" type="radio" name="ventilation" value="1" required />
+                        <label class="form-check-label">
+                            換気なし
+                        </label>
+                        <div class="invalid-feedback my-2">いずれかを選択してください</div>
                     </div>
                 </div>
+            </div>
 
-                <div class="card border-secondary mb-5">
-                    <div class="card-header fs-6">
-                        換気頻度の目安
+            <div class="card border-secondary form-group mb-5">
+                <div class="card-header fs-5">
+                    普段の手洗い
+                </div>
+                <div class="card-body">
+                    <div class="form-check mb-2">
+                        <input class="form-check-input" type="radio" name="handWash" value="0.0001" required />
+                        <label class="form-check-label">
+                            洗剤10秒もみ洗いと15秒すすぎを場所移動ごと
+                        </label>
                     </div>
-                    <div class="card-body">
-                        <div class="form-check mb-2">
-                            <input class="form-check-input" type="radio" name="ventilation" value="0.64">
-                            <label class="form-check-label">
-                                2回/時，または30m<sup>3</sup>/時
-                            </label>
-                        </div>
-                        <div class="form-check mb-2">
-                            <input class="form-check-input" type="radio" name="ventilation" value="0.78">
-                            <label class="form-check-label">
-                                0.5回/時，または20m<sup>3</sup>/時
-                            </label>
-                        </div>
-                        <div class="form-check mb-2">
-                            <input class="form-check-input" type="radio" name="ventilation" value="1">
-                            <label class="form-check-label">
-                                換気なし
-                            </label>
-                        </div>
+                    <div class="form-check mb-2">
+                        <input class="form-check-input" type="radio" name="handWash" value="0.01" required />
+                        <label class="form-check-label">
+                            洗剤10秒もみ洗いと15秒すすぎを1日数回
+                        </label>
+                    </div>
+                    <div class="form-check mb-2">
+                        <input class="form-check-input" type="radio" name="handWash" value="0.01" required />
+                        <label class="form-check-label">
+                            洗剤なし15秒を場所ごと
+                        </label>
+                    </div>
+                    <div class="form-check mb-2">
+                        <input class="form-check-input" type="radio" name="handWash" value="0.1" required />
+                        <label class="form-check-label">
+                            洗剤なし15秒を1日数回
+                        </label>
+                    </div>
+                    <div class="form-check mb-2">
+                        <input class="form-check-input" type="radio" name="handWash" value="1" required />
+                        <label class="form-check-label">
+                            しない
+                        </label>
+                        <div class="invalid-feedback my-2">いずれかを選択してください</div>
                     </div>
                 </div>
+            </div>
 
-                <div class="card border-secondary mb-5">
-                    <div class="card-header fs-6">
-                        普段の手洗い
+            <div class="card border-secondary form-group mb-5">
+                <div class="card-header fs-5">
+                    消毒頻度の目安
+                </div>
+                <div class="card-body">
+                    <div class="form-check mb-2">
+                        <input class="form-check-input" type="radio" name="disinfection" value="0.01" required />
+                        <label class="form-check-label">
+                            こまめに拭き掃除やアルコールなどを用いて消毒
+                        </label>
                     </div>
-                    <div class="card-body">
-                        <div class="form-check mb-2">
-                            <input class="form-check-input" type="radio" name="handWash" value="0.0001">
-                            <label class="form-check-label">
-                                洗剤10秒もみ洗いと15秒すすぎを場所移動ごと
-                            </label>
-                        </div>
-                        <div class="form-check mb-2">
-                            <input class="form-check-input" type="radio" name="handWash" value="0.01">
-                            <label class="form-check-label">
-                                洗剤10秒もみ洗いと15秒すすぎを1日数回
-                            </label>
-                        </div>
-                        <div class="form-check mb-2">
-                            <input class="form-check-input" type="radio" name="handWash" value="0.01">
-                            <label class="form-check-label">
-                                洗剤なし15秒を場所ごと
-                            </label>
-                        </div>
-                        <div class="form-check mb-2">
-                            <input class="form-check-input" type="radio" name="handWash" value="0.1">
-                            <label class="form-check-label">
-                                洗剤なし15秒を1日数回
-                            </label>
-                        </div>
-                        <div class="form-check mb-2">
-                            <input class="form-check-input" type="radio" name="handWash" value="1">
-                            <label class="form-check-label">
-                                しない
-                            </label>
-                        </div>
+                    <div class="form-check mb-2">
+                        <input class="form-check-input" type="radio" name="disinfection" value="0.1" required />
+                        <label class="form-check-label">
+                            1日1回程度
+                        </label>
+                    </div>
+                    <div class="form-check mb-2">
+                        <input class="form-check-input" type="radio" name="disinfection" value="1" required />
+                        <label class="form-check-label">
+                            しない
+                        </label>
+                        <div class="invalid-feedback my-2">いずれかを選択してください</div>
                     </div>
                 </div>
+            </div>
 
-                <div class="card border-secondary mb-5">
-                    <div class="card-header fs-6">
-                        消毒頻度の目安
+            <div class="card border-secondary form-group mb-5">
+                <div class="card-header fs-5">
+                    普段接触するもの
+                </div>
+                <div class="card-body">
+                    <div class="form-check mb-2">
+                        <input class="form-check-input" type="radio" name="contactRate" value="0.01" required />
+                        <label class="form-check-label">
+                            接触するものがほぼ固定されている
+                        </label>
                     </div>
-                    <div class="card-body">
-                        <div class="form-check mb-2">
-                            <input class="form-check-input" type="radio" name="disinfection" value="0.01">
-                            <label class="form-check-label">
-                                こまめに拭き掃除やアルコールなどを用いて消毒
-                            </label>
-                        </div>
-                        <div class="form-check mb-2">
-                            <input class="form-check-input" type="radio" name="disinfection" value="0.1">
-                            <label class="form-check-label">
-                                1日1回程度
-                            </label>
-                        </div>
-                        <div class="form-check mb-2">
-                            <input class="form-check-input" type="radio" name="disinfection" value="1">
-                            <label class="form-check-label">
-                                しない
-                            </label>
-                        </div>
+                    <div class="form-check mb-2">
+                        <input class="form-check-input" type="radio" name="contactRate" value="0.1" required />
+                        <label class="form-check-label">
+                            接触するものが固定されていない
+                        </label>
+                    </div>
+                    <div class="form-check mb-2">
+                        <input class="form-check-input" type="radio" name="contactRate" value="1" required />
+                        <label class="form-check-label">
+                            人の接触場所を素手で接触する
+                        </label>
+                        <div class="invalid-feedback my-2">いずれかを選択してください</div>
                     </div>
                 </div>
+            </div>
 
-                <div class="card border-secondary mb-5">
-                    <div class="card-header fs-6">
-                        普段接触するものについて
-                    </div>
-                    <div class="card-body">
-                        <div class="form-check mb-2">
-                            <input class="form-check-input" type="radio" name="contactRate" value="0.01">
-                            <label class="form-check-label">
-                                接触するものがほぼ固定されている
-                            </label>
-                        </div>
-                        <div class="form-check mb-2">
-                            <input class="form-check-input" type="radio" name="contactRate" value="0.1">
-                            <label class="form-check-label">
-                                接触するものが固定されていない
-                            </label>
-                        </div>
-                        <div class="form-check mb-2">
-                            <input class="form-check-input" type="radio" name="contactRate" value="1">
-                            <label class="form-check-label">
-                                人の接触場所を素手で接触する
-                            </label>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row m-1">
-                    <button type="submit" class="btn btn-lg btn-primary">感染リスクを計算する</button>
-                </div>
-
-            </form>
-        </div>
+            <div class="d-grid gap-2 mb-5">
+                <button type="submit" class="btn btn-lg btn-primary" id="modalButton" data-bs-toggle="modal"
+                    data-bs-target="#modal">
+                    感染リスクを計算する
+                </button>
+            </div>
+        </form>
     </div>
 </body>
+
+<!-- Modal -->
+<div class="modal fade" id="modal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title" id="modalLabel">計算結果</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="modal-body">
+                <div class="border-bottom m-2">
+                    <h2>あなたの感染確率</h2>
+                    <p class="text-center fs-1 mx-2" id="infectionRisk"></p>
+                </div>
+
+                <div class="border-bottom m-2">
+                    <h5>計算式</h5>
+                    <div class="m-2">
+                        <div>
+                            感染確率 = 1日に感染者と接する割合 × (空気を介した感染のリスク + 接触による感染のリスク)
+                        </div>
+                    </div>
+                </div>
+
+                <div class="border-bottom m-2">
+                    <h5>内訳</h5>
+                    <div class="m-2">
+                        <p class="fs-5">1日に感染者と接する割合</p>
+                        <p class="text-center fs-5" id="contactProbability"></p>
+                        <p class="fs-5">空気を介した感染のリスク</p>
+                        <p class="text-center fs-5" id="aerosolRisk"></p>
+                        <p class="fs-5">接触による感染のリスク</p>
+                        <p class="text-center fs-5" id="contactRisk"></p>
+                    </div>
+                </div>
+
+                <div class="d-grid gap-2 m-4">
+                    <button type="button" class="btn btn-lg btn-secondary" data-bs-dismiss="modal"
+                        onclick="window.location.reload();">
+                        閉じる
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
+<script src="/scripts/script.js"></script>
 
 </html>

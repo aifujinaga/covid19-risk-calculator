@@ -23,7 +23,7 @@ func (c *HomeController) RunServer() error {
 	router.LoadHTMLGlob("InfectionRisk/Views/*.html")
 
 	router.GET("/", homeHandler)
-	// router.GET("/result/", resultHandler)
+	router.GET("/result/", resultHandler)
 
 	err = router.Run(":" + c.Port)
 	if err != nil {
@@ -38,12 +38,6 @@ func homeHandler(c *gin.Context) {
 	c.HTML(200, "index.html", m)
 }
 
-// func resultHandler(c *gin.Context) {
-// 	m, err := models.ConvertResultViewModel(c)
-// 	if err != nil {
-// 		c.String(http.StatusBadRequest, "Risk計算を失敗しました")
-// 		return
-// 	}
-
-// 	c.HTML(200, "result.html", m)
-// }
+func resultHandler(c *gin.Context) {
+	c.HTML(200, "result.html", gin.H{})
+}
