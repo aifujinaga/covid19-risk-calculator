@@ -17,8 +17,8 @@ func (c *HomeController) RunServer() error {
 		return err
 	}
 
-	router.Static("/scripts", "InfectionRisk/Views/Scripts")
-	router.LoadHTMLGlob("InfectionRisk/Views/*.html")
+	router.Static("/scripts", "Apps/Views/Scripts")
+	router.LoadHTMLGlob("Apps/Views/*.html")
 
 	router.GET("/", homeHandler)
 	router.GET("/policy", policyHandler)
