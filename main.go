@@ -3,7 +3,7 @@ package main
 import (
 	"log"
 
-	controllers "github/marogosteen/InfectionRisk/InfectionRisk/Controllers"
+	controllers "github/marogosteen/InfectionRisk/Apps/Controllers"
 )
 
 func main() {
