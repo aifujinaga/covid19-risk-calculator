@@ -232,7 +232,7 @@
                         <input class="form-check-input" type="radio" name="ventilation" value="0.64" id="ventilation0"
                             required />
                         <label class="form-check-label" for="ventilation0">
-                            2回/時，または30m<sup>3</sup>/時
+                            30分に1回，または30m<sup>3</sup>/時
                         </label>
                     </div>
 
@@ -240,7 +240,7 @@
                         <input class="form-check-input" type="radio" name="ventilation" value="0.78" id="ventilation1"
                             required />
                         <label class="form-check-label" for="ventilation1">
-                            0.5回/時，または20m<sup>3</sup>/時
+                            2時間に1回，または20m<sup>3</sup>/時
                         </label>
                     </div>
 
@@ -265,7 +265,7 @@
                         <input class="form-check-input" type="radio" name="handWash" value="0.0001" id="handWash0"
                             required />
                         <label class="form-check-label" for="handWash0">
-                            洗剤10秒もみ洗いと15秒すすぎを場所移動ごと
+                            洗剤10秒もみ洗いと、<br class="d-sm-none" />15秒すすぎを場所移動ごと
                         </label>
                     </div>
 
@@ -273,7 +273,7 @@
                         <input class="form-check-input" type="radio" name="handWash" value="0.01" id="hadWash1"
                             required />
                         <label class="form-check-label" for="hadWash1">
-                            洗剤10秒もみ洗いと15秒すすぎを1日数回
+                            洗剤10秒もみ洗いと、<br class="d-sm-none" />15秒すすぎを1日数回
                         </label>
                     </div>
 
@@ -313,7 +313,7 @@
                         <input class="form-check-input" type="radio" name="disinfection" value="0.01" id="disinfection0"
                             required />
                         <label class="form-check-label" for="disinfection0">
-                            こまめに拭き掃除やアルコールなどを用いて消毒
+                            こまめに拭き掃除や,<br class="d-sm-none" />アルコールなどを用いて消毒
                         </label>
                     </div>
 
@@ -346,7 +346,7 @@
                         <input class="form-check-input" type="radio" name="contactRate" value="0.01" id="contactRate0"
                             required />
                         <label class="form-check-label" for="contactRate0">
-                            接触するものがほぼ固定されている
+                            接触するものが、ほとんど決まっている
                         </label>
                     </div>
 
@@ -354,7 +354,7 @@
                         <input class="form-check-input" type="radio" name="contactRate" value="0.1" id="contactRate1"
                             required />
                         <label class="form-check-label" for="contactRate1">
-                            接触するものが固定されていない
+                            接触するものが、決まっていない
                         </label>
                     </div>
 
@@ -362,7 +362,7 @@
                         <input class="form-check-input" type="radio" name="contactRate" value="1" id="contactRate2"
                             required />
                         <label class="form-check-label" for="contactRate2">
-                            人の接触場所を素手で接触する
+                            人の接触したところを素手で接触する
                         </label>
                         <div class="invalid-feedback my-2">いずれかを選択してください</div>
                     </div>
@@ -390,18 +390,18 @@
 
             <div class="modal-body">
                 <div class="border-bottom m-2">
-                    <h2>あなたの感染確率</h2>
+                    <h2>あなたの1日あたりの感染確率</h2>
                     <p class="text-center fs-1 mx-2" id="infectionRisk"></p>
                 </div>
 
                 <div class="border-bottom m-2">
                     <h5>内訳</h5>
                     <div class="m-2">
-                        <p class="fs-5">1日に感染者と接する割合</p>
+                        <p class="fs-5">接割：1日に感染者と接する割合</p>
                         <p class="text-center fs-5" id="contactProbability"></p>
-                        <p class="fs-5">空気を介した感染のリスク</p>
+                        <p class="fs-5">空気リスク：空気を介した感染のリスク</p>
                         <p class="text-center fs-5" id="aerosolRisk"></p>
-                        <p class="fs-5">接触による感染のリスク</p>
+                        <p class="fs-5">接触リスク：接触による感染のリスク</p>
                         <p class="text-center fs-5" id="contactRisk"></p>
                     </div>
                 </div>
@@ -409,9 +409,9 @@
                 <div class="border-bottom m-2">
                     <h5>計算式</h5>
                     <div class="m-2">
-                        <div>
-                            感染確率 = 1日に感染者と接する割合 × (空気を介した感染のリスク + 接触による感染のリスク)
-                        </div>
+                        <p>
+                            感染確率 = 接割 × (空気リスク + 接触リスク)
+                        </p>
                     </div>
                 </div>
 

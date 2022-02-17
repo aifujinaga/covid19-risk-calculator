@@ -45,6 +45,10 @@ function calcRisk() {
     aerosolRisk = maskType * distance * ventilation;
     contactRisk = handWash * disinfection * contactRate;
     infectionRisk = contactProbability * (aerosolRisk + contactRisk) * 100;
+
+    contactProbability = Math.round(contactProbability * 1000) / 1000;
+    aerosolRisk = Math.round(aerosolRisk * 1000) / 1000;
+    contactRisk = Math.round(contactRisk * 1000) / 1000;
     infectionRisk = Math.round(infectionRisk * 1000) / 1000;
 
     infectionRiskElement.textContent = infectionRisk + " %";
