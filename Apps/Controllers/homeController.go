@@ -7,10 +7,13 @@ import (
 )
 
 type HomeController struct {
-	Port string
+	Port    string
+	// GinMode string
 }
 
 func (c *HomeController) RunServer() error {
+	// gin.SetMode(c.GinMode)
+
 	router := gin.Default()
 	err := router.SetTrustedProxies(nil)
 	if err != nil {
