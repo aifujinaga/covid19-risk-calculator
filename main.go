@@ -12,11 +12,11 @@ func main() {
 	if len(port) == 0 {
 		port = "8000"
 	}
-	// ginMode := os.Getenv("release")
+	ginMode := os.Getenv("release")
 
 	homeController := controllers.HomeController{
 		Port:    port,
-		// GinMode: ginMode,
+		GinMode: ginMode,
 	}
 	err := homeController.RunServer()
 	if err != nil {
