@@ -10,9 +10,9 @@ import (
 func main() {
 	port := os.Getenv("PORT")
 	if len(port) == 0 {
-		port = "8000"
+		port = "8080"
 	}
-	ginMode := os.Getenv("release")
+	ginMode := os.Getenv("RELEASE")
 
 	homeController := controllers.HomeController{
 		Port:    port,

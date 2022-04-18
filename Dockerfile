@@ -6,6 +6,6 @@ WORKDIR /src
 COPY . ./
 RUN go build
 
-EXPOSE 3000:3000
+EXPOSE 8080
 
 CMD ["./InfectionRisk"]
