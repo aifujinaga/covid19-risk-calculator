@@ -57,13 +57,13 @@ function calcRisk() {
     contactRiskElement.textContent = contactRisk;
 }
 
-function validDetector(hoge) {
+function validator(calcEvent) {
     isValid = false;
     Array.prototype.slice.call(forms)
         .forEach(function (form) {
             if (!form.checkValidity()) {
-                hoge.preventDefault()
-                hoge.stopPropagation()
+                calcEvent.preventDefault()
+                calcEvent.stopPropagation()
                 isValid = true;
             }
 
@@ -75,7 +75,7 @@ function validDetector(hoge) {
 function calcHandler(event) {
     event.preventDefault();
 
-    isValid = validDetector(event);
+    isValid = validator(event);
     if (isValid) {
         return
     };

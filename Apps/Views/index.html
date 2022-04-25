@@ -232,7 +232,7 @@
                         <input class="form-check-input" type="radio" name="ventilation" value="0.64" id="ventilation0"
                             required />
                         <label class="form-check-label" for="ventilation0">
-                            30分に1回，または30m<sup>3</sup>/時
+                            30分に1回の換気 <br class="d-sm-none" />(2回/時，または30m<sup>3</sup>/時)
                         </label>
                     </div>
 
@@ -240,7 +240,7 @@
                         <input class="form-check-input" type="radio" name="ventilation" value="0.78" id="ventilation1"
                             required />
                         <label class="form-check-label" for="ventilation1">
-                            2時間に1回，または20m<sup>3</sup>/時
+                            通常換気　<br class="d-sm-none" />(0.5回/時，または20m<sup>3</sup>/時)
                         </label>
                     </div>
 
@@ -373,7 +373,7 @@
                 <button type="submit" class="btn btn-lg btn-primary" id="isvalid-button">
                     感染リスクを計算する
                 </button>
-                <input type="hidden" id="hoge-id">
+                <input type="hidden" id="submit-calculate">
                 <input type="hidden" id="modal-trigger" data-bs-toggle="modal" data-bs-target="#modal">
         </form>
     </div>
@@ -397,7 +397,7 @@
                 <div class="border-bottom m-2">
                     <h5>内訳</h5>
                     <div class="m-2">
-                        <p class="fs-5">接割：1日に感染者と接する割合</p>
+                        <p class="fs-5">接触割合：1日に感染者と接する割合</p>
                         <p class="text-center fs-5" id="contactProbability"></p>
                         <p class="fs-5">空気リスク：空気を介した感染のリスク</p>
                         <p class="text-center fs-5" id="aerosolRisk"></p>
@@ -410,7 +410,7 @@
                     <h5>計算式</h5>
                     <div class="m-2">
                         <p>
-                            感染確率 = 接割 × (空気リスク + 接触リスク)
+                            感染確率 = 接触割合 × (空気リスク + 接触リスク)
                         </p>
                     </div>
                 </div>
