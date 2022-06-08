@@ -23,14 +23,14 @@ jobs:
       uses: docker/login-action@v1
       with:
         registry: https://index.docker.io/v1/
-        username: ${{ secrets.AzureAppService_ContainerUsername_f4a6499d400542d4a65699b8a30be174 }}
-        password: ${{ secrets.AzureAppService_ContainerPassword_0d2f6547409d4c2984076f94537f3eb0 }}
+        username: ${{ secrets.AzureAppService_ContainerUsername_c464eac696b849a4bd8f077aecfe9c36 }}
+        password: ${{ secrets.AzureAppService_ContainerPassword_4452f2e1520648a993052be2048de4f0 }}
 
     - name: Build and push container image to registry
       uses: docker/build-push-action@v2
       with:
         push: true
-        tags: index.docker.io/${{ secrets.AzureAppService_ContainerUsername_f4a6499d400542d4a65699b8a30be174 }}/marogosteen/infection-risk-calculate:${{ github.sha }}
+        tags: index.docker.io/${{ secrets.AzureAppService_ContainerUsername_c464eac696b849a4bd8f077aecfe9c36 }}/infection-risk-calculate:${{ github.sha }}
         file: ./Dockerfile
 
   deploy:
@@ -47,5 +47,5 @@ jobs:
       with:
         app-name: 'covid-risk-calculation'
         slot-name: 'production'
-        publish-profile: ${{ secrets.AzureAppService_PublishProfile_8dffea2d8a6c46bbbf281e86c9beb222 }}
-        images: 'index.docker.io/${{ secrets.AzureAppService_ContainerUsername_f4a6499d400542d4a65699b8a30be174 }}/marogosteen/infection-risk-calculate:${{ github.sha }}'
+        publish-profile: ${{ secrets.AzureAppService_PublishProfile_8b52042038e041f8a122e07fd25c85dd }}
+        images: 'index.docker.io/${{ secrets.AzureAppService_ContainerUsername_c464eac696b849a4bd8f077aecfe9c36 }}/infection-risk-calculate:${{ github.sha }}'
