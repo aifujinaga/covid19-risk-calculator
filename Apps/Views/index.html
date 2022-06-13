@@ -61,7 +61,7 @@
 
                 <div class="card-body">
                     <div class="mb-3">
-                        <select id="ariaSelect" class="form-select" for="ariaSelectFor" required>
+                        <select id="ariaSelect" class="form-select form-select" for="ariaSelectFor" required>
                             <option selected disabled value="">選択してください</option>
                             {{range .AriaNames}}
                             <option value={{.}}>{{.}}</option>
@@ -86,7 +86,7 @@
 
                 <div class="card-body">
                     <div class="alert alert-warning mb-3" role="alert">
-                        <p class="card-text"><small>人との接触時間が15分以上で距離が1m以内</small></p>
+                        <p class="card-text"><small>接触時間が15分以上で距離が1m以内の人数</small></p>
                     </div>
 
                     <div class="form-check mb-2">
@@ -142,7 +142,7 @@
 
             <div class="card border-secondary form-group mb-5">
                 <div class="card-header fs-5">
-                    普段使用されているマスクの種類
+                    普段使用しているマスクの種類
                 </div>
 
                 <div class="card-body">
@@ -182,7 +182,7 @@
                         <input class="form-check-input" type="radio" value="1" name="maskType" id="maskType4"
                             required />
                         <label class="form-check-label" for="maskType4">
-                            ファイスシールド
+                            フェイスシールド
                         </label>
                         <div class="invalid-feedback my-2">いずれかを選択してください</div>
                     </div>
@@ -191,7 +191,7 @@
 
             <div class="card border-secondary form-group mb-5">
                 <div class="card-header fs-5">
-                    心がけているソーシャルディスタンス
+                    人との距離
                 </div>
 
                 <div class="card-body">
@@ -199,7 +199,7 @@
                         <input class="form-check-input" type="radio" name="distance" value="0.25" id="distance0"
                             required />
                         <label class="form-check-label" for="distance0">
-                            2 m
+                            2 m 以上
                         </label>
                     </div>
 
@@ -207,7 +207,7 @@
                         <input class="form-check-input" type="radio" name="distance" value="0.5" id="distance1"
                             required />
                         <label class="form-check-label" for="distance1">
-                            1 m
+                            1 m 程度
                         </label>
                     </div>
 
@@ -215,7 +215,7 @@
                         <input class="form-check-input" type="radio" name="distance" value="1" id="distance2"
                             required />
                         <label class="form-check-label" for="distance2">
-                            取らない
+                            意識して取っていない
                         </label>
                         <div class="invalid-feedback my-2">いずれかを選択してください</div>
                     </div>
@@ -224,15 +224,19 @@
 
             <div class="card border-secondary form-group mb-5">
                 <div class="card-header fs-5">
-                    換気頻度の目安
+                    換気
                 </div>
 
                 <div class="card-body">
+                    <div class="alert alert-warning mb-3" role="alert">
+                        <p class="card-text"><small>一日に一番多く過ごす場所について</small></p>
+                    </div>
+
                     <div class="form-check mb-2">
                         <input class="form-check-input" type="radio" name="ventilation" value="0.64" id="ventilation0"
                             required />
                         <label class="form-check-label" for="ventilation0">
-                            30分に1回の換気 <br class="d-sm-none" />(2回/時，または30m<sup>3</sup>/時)
+                            一般病室水準の換気 <br class="d-sm-none" />(30分に1回，または30m<sup>3</sup>/時の換気)
                         </label>
                     </div>
 
@@ -240,7 +244,7 @@
                         <input class="form-check-input" type="radio" name="ventilation" value="0.78" id="ventilation1"
                             required />
                         <label class="form-check-label" for="ventilation1">
-                            通常換気　<br class="d-sm-none" />(0.5回/時，または20m<sup>3</sup>/時)
+                            通常換気　<br class="d-sm-none" />(2時間に1回，または20m<sup>3</sup>/時)
                         </label>
                     </div>
 
@@ -305,10 +309,14 @@
 
             <div class="card border-secondary form-group mb-5">
                 <div class="card-header fs-5">
-                    消毒頻度の目安
+                    消毒頻度
                 </div>
 
                 <div class="card-body">
+                    <div class="alert alert-warning mb-3" role="alert">
+                        <p class="card-text"><small>他の人も使用する机や椅子など</small></p>
+                    </div>
+
                     <div class="form-check mb-2">
                         <input class="form-check-input" type="radio" name="disinfection" value="0.01" id="disinfection0"
                             required />
@@ -338,15 +346,18 @@
 
             <div class="card border-secondary form-group mb-5">
                 <div class="card-header fs-5">
-                    普段接触するもの
+                    普段接触と他の人の接触
                 </div>
-
                 <div class="card-body">
+                    <div class="alert alert-warning mb-3" role="alert">
+                        <p class="card-text"><small>普段接触するもの：机や椅子など</small></p>
+                    </div>
+
                     <div class="form-check mb-2">
                         <input class="form-check-input" type="radio" name="contactRate" value="0.01" id="contactRate0"
                             required />
                         <label class="form-check-label" for="contactRate0">
-                            接触するものが、ほとんど決まっている
+                            接触するものが，ほとんどが自分専用
                         </label>
                     </div>
 
@@ -354,7 +365,7 @@
                         <input class="form-check-input" type="radio" name="contactRate" value="0.1" id="contactRate1"
                             required />
                         <label class="form-check-label" for="contactRate1">
-                            接触するものが、決まっていない
+                            接触するものは，他の人も使う
                         </label>
                     </div>
 
@@ -390,19 +401,26 @@
 
             <div class="modal-body">
                 <div class="border-bottom m-2">
-                    <h2>あなたの1日あたりの感染確率</h2>
+                    <h2>1日あたりの感染確率</h2>
                     <p class="text-center fs-1 mx-2" id="infectionRisk"></p>
                 </div>
 
                 <div class="border-bottom m-2">
                     <h5>内訳</h5>
                     <div class="m-2">
-                        <p class="fs-5">接触割合：1日に感染者と接する割合</p>
-                        <p class="text-center fs-5" id="contactProbability"></p>
-                        <p class="fs-5">空気リスク：空気を介した感染のリスク</p>
-                        <p class="text-center fs-5" id="aerosolRisk"></p>
-                        <p class="fs-5">接触リスク：接触による感染のリスク</p>
-                        <p class="text-center fs-5" id="contactRisk"></p>
+                        <p class="fs-5">接触割合：<br class="d-sm-none" />1日に感染者と接する割合</p>
+                        <u>
+                            <p class="text-center fs-5" id="contactProbability"></p>
+                        </u>
+                        <p class="fs-5">空気リスク：<br class="d-sm-none" />飛沫やエアロゾルによる感染のリスク</p>
+                        <u>
+                            <p class="text-center fs-5" id="aerosolRisk"></p>
+                        </u>
+                        <p class="fs-5">接触リスク：<br class="d-sm-none" />接触による感染のリスク</p>
+                        <u>
+                            <p class="text-center fs-5" id="contactRisk"></p>
+                        </u>
+                        <p class="text-end">0%は，0.001%未満</p>
                     </div>
                 </div>
 

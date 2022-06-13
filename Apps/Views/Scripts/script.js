@@ -52,9 +52,9 @@ function calcRisk() {
     infectionRisk = Math.round(infectionRisk * 1000) / 1000;
 
     infectionRiskElement.textContent = infectionRisk + " %";
-    contactProbabilityElement.textContent = contactProbability;
-    aerosolRiskElement.textContent = aerosolRisk;
-    contactRiskElement.textContent = contactRisk;
+    contactProbabilityElement.textContent = contactProbability + " %";
+    aerosolRiskElement.textContent = aerosolRisk + " %";
+    contactRiskElement.textContent = contactRisk + " %";
 }
 
 function validator(calcEvent) {
