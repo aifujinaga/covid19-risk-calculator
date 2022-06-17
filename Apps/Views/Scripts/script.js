@@ -32,8 +32,8 @@ async function callApi() {
 };
 
 function calcRisk() {
-    infectedPeople = parseFloat(formElement.infectedPeople.value);
-    contactCountPerDay = parseFloat(formElement.contactCountPerDay.value);
+    infectedPeople = parseInt(formElement.infectedPeople.value);
+    contactCountPerDay = parseInt(formElement.contactCountPerDay.value);
     maskType = parseFloat(formElement.maskType.value);
     distance = parseFloat(formElement.distance.value);
     ventilation = parseFloat(formElement.ventilation.value);
@@ -41,7 +41,7 @@ function calcRisk() {
     disinfection = parseFloat(formElement.disinfection.value);
     contactRate = parseFloat(formElement.contactRate.value);
 
-    contactProbability = infectedPeople / 1000000 * 2;
+    contactProbability = infectedPeople / 1000000 * 2 * contactCountPerDay;
     aerosolRisk = maskType * distance * ventilation;
     contactRisk = handWash * disinfection * contactRate;
     infectionRisk = contactProbability * (aerosolRisk + contactRisk) * 100;
