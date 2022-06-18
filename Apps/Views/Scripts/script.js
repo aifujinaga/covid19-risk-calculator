@@ -36,7 +36,7 @@ function calcRisk() {
     disinfection = parseFloat(formElement.disinfection.value);
     contactRate = parseFloat(formElement.contactRate.value);
 
-    contactProbability = infectedPeople / 10**5 * 2 * contactCountPerDay;
+    contactProbability = infectedPeople / 10**5 * contactCountPerDay;
     aerosolRisk = maskType * distance * ventilation;
     contactRisk = handWash * disinfection * contactRate;
     infectionRisk = contactProbability * (aerosolRisk + contactRisk) * 100;
@@ -47,9 +47,9 @@ function calcRisk() {
     infectionRisk = Math.round(infectionRisk * 1000) / 1000;
 
     infectionRiskElement.textContent = infectionRisk + " %";
-    contactProbabilityElement.textContent = contactProbability + " %";
-    aerosolRiskElement.textContent = aerosolRisk + " %";
-    contactRiskElement.textContent = contactRisk + " %";
+    contactProbabilityElement.textContent = contactProbability;
+    aerosolRiskElement.textContent = aerosolRisk;
+    contactRiskElement.textContent = contactRisk;
 }
 
 function validator(calcEvent) {
