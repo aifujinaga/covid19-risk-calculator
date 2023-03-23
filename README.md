@@ -1,21 +1,17 @@
-# InfectionRiskCalculate
+# corvid19-risk-calculator
 
 COVID-19 infection risk calculation
-
-# Requirement
-
-* github.com/gin-gonic/gin v1.7.7 
 
 # Installation
 
 ```
-git clone https://github.com/marogosteen/InfectionRiskCalculate.git InfectionRiskCalculate
+git clone https://github.com/aifujinaga/covid19-risk-calculator.git
 ```
 
 # Author
 
-* [marogosteen](https://github.com/marogosteen/)
+* [aifujinaga](https://github.com/aifujinaga/)
 
 # License
 
-"InfectionRiskCalculate" is under [MIT license](https://en.wikipedia.org/wiki/MIT_License).
+"corvid19-risk-calculator" is under [MIT license](https://en.wikipedia.org/wiki/MIT_License).
